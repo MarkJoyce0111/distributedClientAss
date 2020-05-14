@@ -21,6 +21,7 @@ def main():
                                   ["Student Login", "Staff Login", "Quit"])
         if int(selection) == student:
             studentID = getId("Student", correctStudentIdLength)
+            
             if (studentID != "quit"):
                 print("The student ID is: " + studentID)
                 print("VALIDATING")
