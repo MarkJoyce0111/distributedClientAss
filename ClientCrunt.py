@@ -65,6 +65,7 @@ def main():
                                                           ["Enter student results", "Check for Honours Eligibility",
                                                            "Show T-Script", "Quit"])
                                 print("You selected: " + selection) # Debug
+
                                 # TODO - PreProcessing and RPC CALLS
                                 if selection == addStudentResuts:
                                     pass # Create payload and send it.
