@@ -14,7 +14,6 @@ def main():
     correctStudentIdLength = 8
     correctStaffIdLength = 8
 
-    clear()
     while True:
         clear()
         selection = marksAutoMenu("Welcome to the Blah CLIENT System\nPlease select a Student login or a Staff login",
@@ -23,9 +22,8 @@ def main():
             studentID = getId("Student", correctStudentIdLength)
             
             if (studentID != "quit"):
-                print("The student ID is: " + studentID)
                 print("VALIDATING")
-                detail = {"studentID": studentID} # Create Dictionary
+                detail = {"studentID": int(studentID)} # Create Dictionary
                 payload = json.dumps(detail, indent = 4) # Convert Dict to json
                 print(payload)
                 valid = validateStudent(payload) # TODO - Call for validation at Server End.
@@ -40,9 +38,8 @@ def main():
         elif int(selection) == staff:
             staffID = getId("Staff", correctStaffIdLength)
             if (staffID != "quit"):
-                print("The Staff ID is: " + staffID)
                 print("VALIDATING")
-                detail = {"staffID": staffID} # Create Dictionary
+                detail = {"staffID": int(staffID)} # Create Dictionary
                 payload = json.dumps(detail, indent = 4) # Convert Dict to json
                 print(payload)
                 valid = validateStaff(payload) # TODO - Call for validation at Server End. returns True for debug.
@@ -52,9 +49,8 @@ def main():
                         print("Welcome\nPlease Enter a Student ID to search")
                         studentID = getId("Student", correctStudentIdLength)
                         if (studentID != "quit"):
-                            print("The student ID is: " + studentID)
                             print("VALIDATING")
-                            detail = {"studentID": studentID} # Create Dictionary
+                            detail = {"studentID": int(studentID)} # Create Dictionary
                             payload = json.dumps(detail, indent = 4) # Convert Dict to json
                             print(payload)
                             valid = validateStudent(payload) # TODO - Call for validation at Server End. returns True for debug
@@ -65,8 +61,6 @@ def main():
                                 selection = marksAutoMenu("Welcome to the student results menu, please make a selection",
                                                           ["Enter student results", "Check for Honours Eligibility",
                                                            "Show T-Script", "Quit"])
-                                print("You selected: " + selection) # Debug
-
                                 # TODO - PreProcessing and RPC CALLS
                                 if selection == addStudentResuts:
                                     pass # Create payload and send it.
@@ -95,6 +89,7 @@ def main():
             break
 
 
+
 def table_list(value_list):
     # Print the table
     print ("%5s %13s" % ("-" * 12, "-" * 14))
@@ -102,6 +97,7 @@ def table_list(value_list):
     print ("%5s %13s" % ("-" * 12, "-" * 14))
     for node in range(len(value_list)):
         print ("%6s %16s" % (value_list[node]['studentID'], value_list[node]['studentName']))
+    print ("\n")
 
 
 # Marks Auto Menu
@@ -114,9 +110,7 @@ def marksAutoMenu(prompt, menuList):
         for i in range(menuLimit):
             print("" + str(i + 1) + ") " + menuList[i] )
         selection = input()
-        print("You Selected: " + selection)
         if numericAndInRange(selection, menuLimit):
-            print("You selected a valid option")
             break
         else:
             print("You selected a invalid option, press enter to continue")
